@@ -18,5 +18,5 @@ foreach($fileEa in $FileList)
 Compress-Archive -Path $tempFinalFolder -DestinationPath G:\Project\extract_WB1_$a.zip -Force
 
 
-
+Get-ChildItem $tempFinalFolder -File | Remove-Item -Force
 
