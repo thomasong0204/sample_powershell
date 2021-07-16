@@ -1,0 +1,1 @@
+powershell -ExecutionPolicy Bypass -Command "& {"D:\GERI\powershell_extract\select_date.ps1"}"
