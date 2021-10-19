@@ -1,0 +1,44 @@
+
+set Month=%date:~7,2%
+set Year=%date:~10,4%
+
+set /a CYEAR =%Year%-1
+set /a Pmth = %Month%-1
+
+
+if %Pmth%==1 set monthName=January
+if %Pmth%==2 set monthName=Febuary
+if %Pmth%==3 set monthName=March
+if %Pmth%==4 set monthName=April
+if %Pmth%==5 set monthName=May
+if %Pmth%==6 set monthName=June
+if %Pmth%==7 set monthName=July
+if %Pmth%==8 set monthName=August
+if %Pmth%==9 set monthName=September
+if %Pmth%==10 set monthName=October
+if %Pmth%==11 set monthName=November
+if %Pmth%==0 set monthName=December
+if %Pmth%==0 set Year=CYEAR
+
+set mmyyyy=%monthName%_%Year%
+
+
+"C:\Program Files (x86)\WinSCP\WinSCP.com" ^
+  /log="G:\zzz_%todaydate%.log" /ini=nul ^
+  /command ^
+    "open sftp://xxx:xxx@xxx -hostkey=""ssh-rsa 2048 xxx"" -privatekey=""xxx"" -passphrase=""xx"" -rawsettings TryAgent=0 AuthGSSAPI=0 KEX=""dh-group14-sha1,dh-gex-sha1,ecdh,rsa,WARN,dh-group1-sha1"""^
+	"cd zzzz"^
+	"mkdir "%mmyyyy%"" ^
+	"put G:\xxx.zip /zzz/%mmyyyy%/zzz.zip -resumesupport=off"^
+	"exit"^
+
+
+
+set WINSCP_RESULT=%ERRORLEVEL%
+if %WINSCP_RESULT% equ 0 (
+  echo Success
+) else (
+  echo Error
+)
+
+exit /b %WINSCP_RESULT%
